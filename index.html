@@ -102,31 +102,7 @@
       color: var(--white-mute);
       margin-top: 4px;
     }
-    .hero-scroll {
-      position: absolute;
-      bottom: 2rem;
-      right: 5%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: var(--white-mute);
-      font-family: var(--font-condensed);
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-    .hero-scroll-line {
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--red), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-    @keyframes scrollLine {
-      0%, 100% { transform: scaleY(1); opacity: 1; }
-      50% { transform: scaleY(0.5); opacity: 0.4; }
-    }
+
     .pillars {
       background: var(--black-mid);
       border-top: 1px solid var(--grey-line);
@@ -145,12 +121,10 @@
     .pillar-num {
       font-family: var(--font-display);
       font-size: 4rem;
-      color: rgba(249,30,15,0.15);
+      color: var(--red);
       line-height: 1;
       margin-bottom: 0.5rem;
-      transition: color var(--transition);
     }
-    .pillar:hover .pillar-num { color: rgba(249,30,15,0.4); }
     .pillar-title {
       font-family: var(--font-condensed);
       font-size: 1.25rem;
@@ -187,14 +161,7 @@
     }
     .what-card:hover { background: var(--black-card2); }
     .what-card:hover::before { transform: scaleX(1); }
-    .what-card-num {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      color: rgba(252,252,252,0.05);
-      line-height: 1;
-      position: absolute;
-      top: 1.5rem; right: 1.5rem;
-    }
+
     .what-card-title {
       font-family: var(--font-condensed);
       font-size: 0.75rem;
@@ -219,19 +186,23 @@
       gap: 5rem;
       align-items: center;
     }
-    .about-img-wrap { position: relative; }
+    .about-img-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
     .about-img-wrap img {
-      width: 100%;
-      height: 580px;
+      width: 340px;
+      height: 340px;
       object-fit: cover;
-      filter: grayscale(20%);
+      border-radius: 50%;
       display: block;
+      filter: none;
     }
     .about-img-badge {
-      position: absolute;
-      bottom: -20px; right: -20px;
       background: var(--red);
-      padding: 1.5rem 2rem;
+      padding: 1.2rem 2rem;
       font-family: var(--font-display);
       font-size: 1rem;
       letter-spacing: 0.05em;
@@ -306,7 +277,7 @@
     }
     .transform-slot {
       background: var(--black-card);
-      aspect-ratio: 3/4;
+      aspect-ratio: 1/1;
       position: relative;
       overflow: hidden;
       cursor: pointer;
@@ -314,12 +285,14 @@
     .transform-slot img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      filter: grayscale(30%);
+      object-fit: contain;
+      object-position: center;
+      background: var(--black-card);
+      filter: grayscale(20%);
       transition: filter 0.4s, transform 0.6s;
       display: block;
     }
-    .transform-slot:hover img { filter: grayscale(0%); transform: scale(1.04); }
+    .transform-slot:hover img { filter: grayscale(0%); transform: scale(1.02); }
     .transforms-cta { text-align: center; margin-top: 2.5rem; }
     .contact-strip { background: var(--red); padding: 60px 0; }
     .contact-strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
@@ -329,7 +302,7 @@
     .contact-info a:hover { color: var(--white); }
     @media (max-width: 1024px) {
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-img-wrap img { height: 400px; }
+      .about-img-wrap img { width: 260px; height: 260px; }
     }
     @media (max-width: 768px) {
       .pillars-grid { grid-template-columns: 1fr; }
@@ -355,6 +328,7 @@
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="programs.html">Programs</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
         <li><a href="contact.html" class="nav-cta">Book A Call</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Toggle menu">
@@ -366,6 +340,7 @@
   <div class="nav-mobile">
     <a href="index.html">Home</a>
     <a href="programs.html">Programs</a>
+    <a href="contact.html">Contact Us</a>
     <a href="contact.html" class="nav-cta">Book A Call</a>
   </div>
 
@@ -395,10 +370,7 @@
         </div>
       </div>
     </div>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      Scroll
-    </div>
+
   </section>
 
   <div class="pillars">
@@ -430,19 +402,16 @@
       <p class="section-sub reveal" data-delay="160">Tailor made to YOU &amp; the goals you aim to achieve.</p>
       <div class="what-grid">
         <div class="what-card reveal" data-delay="0">
-          <div class="what-card-num">01</div>
           <div class="what-card-title">One</div>
           <h3>Rebuilding The Body</h3>
           <p>We rebuild the body by focusing on sustainable strength, balanced nutrition, and intelligent training — not quick fixes. Every program is tailored to your goals, lifestyle, and starting point, ensuring you build lean muscle, improve performance, and regain confidence in how you move and feel.</p>
         </div>
         <div class="what-card reveal" data-delay="120">
-          <div class="what-card-num">02</div>
           <div class="what-card-title">Two</div>
           <h3>Rebuilding The Mind &amp; Lifestyle</h3>
           <p>True transformation starts in the mind. We help clients shift habits, routines, and daily decision-making so fitness becomes part of life — not something that competes with it. By developing mental resilience, structure, and consistency, we create a lifestyle that supports progress.</p>
         </div>
         <div class="what-card reveal" data-delay="240">
-          <div class="what-card-num">03</div>
           <div class="what-card-title">Three</div>
           <h3>Build Accountability &amp; Discipline</h3>
           <p>Results come from systems, not motivation. We provide clear structure, measurable targets, and ongoing accountability to keep you on track when motivation fades. Through proven systems and coach-led discipline, we help you stay consistent and achieve results you can maintain.</p>
@@ -455,27 +424,27 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-img-wrap reveal-left">
-          <img src="images/58a5a935217af2061ca4a43f403e48e8.jpg.jpeg" alt="MNM Fitness Coaches" />
+          <img src="images/a25d11a0684fbc451915087ff3bc992e.png" alt="MNM Fitness" />
           <div class="about-img-badge">15+<span>Transformations in 2025</span></div>
         </div>
         <div class="reveal-right">
           <p class="section-label">About Us</p>
-          <h2 class="section-title">Ahem!<br>Hello.</h2>
-          <p style="color:var(--white-dim);line-height:1.85;margin-bottom:1.5rem;">We're <strong style="color:var(--white)">Nicholas Martino</strong> and <strong style="color:var(--white)">Salvatore Mazzucco</strong>, the coaching partners behind MNM Fitness. We built MNM Fitness with one clear mission: to help individuals build strong bodies, disciplined minds, and sustainable lifestyles.</p>
+          <h2 class="section-title">Hello!</h2>
+          <p style="color:var(--white-dim);line-height:1.85;margin-bottom:1.5rem;">We're <strong style="color:var(--white)">Salvatore Mazzucco</strong> and <strong style="color:var(--white)">Nicholas Martino</strong>, the coaching partners behind MNM Fitness. We built MNM Fitness with one clear mission: to help individuals build strong bodies, disciplined minds, and sustainable lifestyles.</p>
           <p style="color:var(--white-dim);line-height:1.85;margin-bottom:2.5rem;">We've seen that real results come from structure, consistency, and accountability — not shortcuts. Together, we combine intelligent training, practical nutrition, and real-world systems to guide our clients through every phase of transformation.</p>
           <div class="coaches-list">
             <div class="coach-card">
-              <img src="images/69b7595ca03d5d7df49504599e5d6fd4.jpg.jpeg" alt="Nicholas Martino" style="width:52px;height:52px;object-fit:cover;object-position:top;border-radius:50%;flex-shrink:0;" />
-              <div class="coach-card-info">
-                <h4>Nicholas Martino</h4>
-                <p>Fitness Trainer / Nutritionist — Co-Owner</p>
-              </div>
-            </div>
-            <div class="coach-card">
-              <img src="images/4cf6fd2b3f998708d2d536b4f5788182.jpg.jpeg" alt="Salvatore Mazzucco" style="width:52px;height:52px;object-fit:cover;object-position:top;border-radius:50%;flex-shrink:0;" />
+              <img src="images/408a807a433c9fa4bb9e626d71ecf1fd.png" alt="Salvatore Mazzucco" style="width:52px;height:52px;object-fit:cover;object-position:top;border-radius:50%;flex-shrink:0;filter:grayscale(100%);" />
               <div class="coach-card-info">
                 <h4>Salvatore Mazzucco</h4>
                 <p>Fitness Trainer / Nutritionist — Owner</p>
+              </div>
+            </div>
+            <div class="coach-card">
+              <img src="images/58a5a935217af2061ca4a43f403e48e8.jpg.jpeg" alt="Nicholas Martino" style="width:52px;height:52px;object-fit:cover;object-position:top;border-radius:50%;flex-shrink:0;filter:grayscale(100%);" />
+              <div class="coach-card-info">
+                <h4>Nicholas Martino</h4>
+                <p>Fitness Trainer / Nutritionist — Co-Owner</p>
               </div>
             </div>
           </div>
@@ -523,24 +492,24 @@
 
   <section style="padding:0;overflow:hidden;">
     <div style="display:grid;grid-template-columns:1fr 1fr;">
-      <div style="position:relative;overflow:hidden;aspect-ratio:3/4;">
-        <img src="images/408a807a433c9fa4bb9e626d71ecf1fd.png" alt="Nicholas Martino" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(10%);display:block;" />
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.95) 0%,rgba(11,11,11,0.3) 50%,transparent 100%);"></div>
-        <div style="position:absolute;bottom:0;left:0;padding:2.5rem;">
-          <p style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;">Co-Owner</p>
-          <h3 style="font-family:var(--font-display);font-size:2rem;color:var(--white);letter-spacing:0.02em;line-height:1;">Nicholas<br>Martino</h3>
-          <p style="font-size:0.85rem;color:var(--white-dim);margin-top:0.5rem;">Fitness Trainer / Nutritionist</p>
-        </div>
-      </div>
-      <div style="position:relative;overflow:hidden;aspect-ratio:3/4;">
-        <img src="images/58a5a935217af2061ca4a43f403e48e8.jpg.jpeg" alt="Salvatore Mazzucco" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(10%);display:block;" />
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.95) 0%,rgba(11,11,11,0.3) 50%,transparent 100%);"></div>
-        <div style="position:absolute;bottom:0;left:0;padding:2.5rem;">
-          <p style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;">Owner</p>
-          <h3 style="font-family:var(--font-display);font-size:2rem;color:var(--white);letter-spacing:0.02em;line-height:1;">Salvatore<br>Mazzucco</h3>
-          <p style="font-size:0.85rem;color:var(--white-dim);margin-top:0.5rem;">Fitness Trainer / Nutritionist</p>
-        </div>
-      </div>
+    <div style="position:relative;overflow:hidden;aspect-ratio:3/4;">
+    <img src="images/408a807a433c9fa4bb9e626d71ecf1fd.png" alt="Salvatore Mazzucco" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(10%);display:block;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.95) 0%,rgba(11,11,11,0.3) 50%,transparent 100%);"></div>
+    <div style="position:absolute;bottom:0;left:0;padding:2.5rem;">
+    <p style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;">Owner</p>
+    <h3 style="font-family:var(--font-display);font-size:2rem;color:var(--white);letter-spacing:0.02em;line-height:1;">Salvatore<br>Mazzucco</h3>
+    <p style="font-size:0.85rem;color:var(--white-dim);margin-top:0.5rem;">Fitness Trainer / Nutritionist</p>
+    </div>
+    </div>
+    <div style="position:relative;overflow:hidden;aspect-ratio:3/4;">
+    <img src="images/58a5a935217af2061ca4a43f403e48e8.jpg.jpeg" alt="Nicholas Martino" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(10%);display:block;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.95) 0%,rgba(11,11,11,0.3) 50%,transparent 100%);"></div>
+    <div style="position:absolute;bottom:0;left:0;padding:2.5rem;">
+    <p style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;">Co-Owner</p>
+    <h3 style="font-family:var(--font-display);font-size:2rem;color:var(--white);letter-spacing:0.02em;line-height:1;">Nicholas<br>Martino</h3>
+    <p style="font-size:0.85rem;color:var(--white-dim);margin-top:0.5rem;">Fitness Trainer / Nutritionist</p>
+    </div>
+    </div>
     </div>
   </section>
 
@@ -576,7 +545,7 @@
         <div class="contact-info reveal-right">
           <a href="mailto:mnmfitness02@gmail.com">mnmfitness02@gmail.com</a>
           <a href="tel:+16475454129">+1 (647) 545-4129</a>
-          <a href="contact.html" class="btn btn-outline" style="margin-top:0.5rem;border-color:rgba(255,255,255,0.4);color:white;">Book A Call</a>
+          <a href="contact.html" class="btn btn-outline" style="margin-top:0.5rem;border-color:rgba(255,255,255,0.4);color:white;display:inline-flex;align-items:center;justify-content:center;">Book A Call</a>
         </div>
       </div>
     </div>
@@ -586,9 +555,6 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <div style="margin-bottom:1rem;">
-            <img src="images/a25d11a0684fbc451915087ff3bc992e.png" alt="MNM Fitness" style="height:60px;width:auto;" />
-          </div>
           <p>Building your body, mind &amp; lifestyle is the MNM way. Taking control of your life and the outcomes is how you grow.</p>
           <div class="footer-socials">
             <a href="https://www.youtube.com/channel/UCADaLFbRzQazHt6REiQwi5A" target="_blank" rel="noopener" aria-label="YouTube">
@@ -605,7 +571,7 @@
           <a href="programs.html">Programs</a>
           <a href="programs.html#coaching">Coaching</a>
           <a href="programs.html#subscriptions">Subscriptions</a>
-          <a href="contact.html">Book A Call</a>
+          <a href="contact.html">Contact Us</a>
         </div>
         <div class="footer-col">
           <h4>Contact</h4>
@@ -615,7 +581,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2025 <em>MNM Fitness</em>. All rights reserved.</span>
+        <span>&copy; 2026 <em>MNM Fitness</em>. All rights reserved.</span>
         <span>Toronto, Canada</span>
       </div>
     </div>
