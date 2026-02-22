@@ -243,11 +243,11 @@
             <label for="interest">I'm Interested In</label>
             <select id="interest" name="interest">
               <option value="" disabled selected>Select a program</option>
-              <option value="coaching-remote">Premium 2 on 1 Coaching — Remote</option>
-              <option value="coaching-inperson">Premium 2 on 1 Coaching — In Person</option>
-              <option value="subscriptions">MNM Subscriptions</option>
-              <option value="otp">One-Time Products</option>
-              <option value="unsure">Not sure — I'd like to chat</option>
+              <option value="Premium 2 on 1 Coaching - Remote">Premium 2 on 1 Coaching - Remote</option>
+              <option value="Premium 2 on 1 Coaching - In Person">Premium 2 on 1 Coaching - In Person</option>
+              <option value="MNM Subscriptions">MNM Subscriptions</option>
+              <option value="One-Time Products">One-Time Products</option>
+              <option value="Not sure - I'd like to chat">Not sure - I'd like to chat</option>
             </select>
           </div>
           <div class="form-group">
@@ -276,11 +276,24 @@
 
   <script src="main.js"></script>
   <script>
+    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSeQfJpncoBpm_WblZH9HLY6TDGJm17C38Q2vRUKJeTWE7jrIQ/formResponse';
+    const ENTRY_IDS = {
+      firstName: 'entry.1768735307',
+      lastName:  'entry.1423753790',
+      email:     'entry.242311129',
+      phone:     'entry.1112655464',
+      interest:  'entry.1187147099',
+      message:   'entry.1951215476'
+    };
+
     const form = document.getElementById('contactForm');
     const formWrap = document.getElementById('formWrap');
     const formSuccess = document.getElementById('formSuccess');
-    form?.addEventListener('submit', (e) => {
+
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Validate required fields
       const required = form.querySelectorAll('[required]');
       let valid = true;
       required.forEach(field => {
@@ -291,6 +304,28 @@
         }
       });
       if (!valid) return;
+
+      // Build form data for Google Forms
+      const data = new FormData();
+      data.append(ENTRY_IDS.firstName, document.getElementById('firstName').value.trim());
+      data.append(ENTRY_IDS.lastName,  document.getElementById('lastName').value.trim());
+      data.append(ENTRY_IDS.email,     document.getElementById('email').value.trim());
+      data.append(ENTRY_IDS.phone,     document.getElementById('phone').value.trim());
+      data.append(ENTRY_IDS.interest,  document.getElementById('interest').value);
+      data.append(ENTRY_IDS.message,   document.getElementById('message').value.trim());
+
+      // Submit silently to Google Forms (no-cors so no response expected)
+      try {
+        await fetch(GOOGLE_FORM_ACTION, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: data
+        });
+      } catch (err) {
+        // no-cors always throws — submission still goes through
+      }
+
+      // Show success screen
       formWrap.style.display = 'none';
       formSuccess.style.display = 'block';
     });

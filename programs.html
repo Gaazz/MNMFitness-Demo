@@ -46,6 +46,7 @@
     .phase-free-month { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-condensed); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 1.5rem; padding: 8px 14px; background: rgba(249,30,15,0.08); border: 1px solid rgba(249,30,15,0.2); }
     .phase-free-month::before { content: '★'; font-size: 0.7rem; }
     .subs-section { padding-top: 100px; }
+    #coaching, #subscriptions, #otp { scroll-margin-top: calc(var(--nav-h) + 57px); }
     .subs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 3rem; background: var(--grey-line); }
     .sub-card { background: var(--black-card); padding: 2.5rem; position: relative; overflow: hidden; transition: background var(--transition); }
     .sub-card:hover { background: var(--black-card2); }
@@ -235,14 +236,38 @@
       <div class="subs-grid">
         <div class="sub-card reveal" data-delay="0">
           <div class="sub-tag">Monthly Subscription</div>
+          <h3>MNM 6 Week Training Block Membership</h3>
+          <div class="sub-price">$14.99<small> / mo</small></div>
+          <ul class="sub-features">
+            <li>Access to a continuously updated library of structured training programs</li>
+            <li>6 week training blocks to build a structured routine in the gym</li>
+            <li>MNM Training Vault Exercise Videos</li>
+            <li>Monthly focus areas to reinforce discipline and consistency</li>
+            <li>Clear systems and principles rather than temporary motivation</li>
+            <li>Designed to support long-term lifestyle and identity change</li>
+          </ul>
+          <a href="contact.html" class="btn btn-ghost">Become a Member</a>
+        </div>
+        <div class="sub-card reveal" data-delay="120">
+          <div class="sub-tag">Monthly Subscription</div>
           <h3>MNM Training Vault</h3>
           <div class="sub-price">$9.99<small> / mo</small></div>
           <ul class="sub-features">
-            <li>Access to a continuously updated library of structured training programs</li>
-            <li>Programming designed for fat loss and lean muscle development</li>
-            <li>Built-in progression for long-term results and consistency</li>
-            <li>4 Core Training Principles</li>
-            <li>Video modules for each exercise</li>
+            <li>Access to a continuously updated library of MNM training videos</li>
+            <li>Request specific training videos to be added the next month</li>
+          </ul>
+          <a href="contact.html" class="btn btn-ghost">Become a Member</a>
+        </div>
+        <div class="sub-card reveal" data-delay="0">
+          <div class="sub-tag">Monthly Subscription</div>
+          <h3>MNM Weak Point Specialization</h3>
+          <div class="sub-price">$14.99<small> / mo</small></div>
+          <ul class="sub-features">
+            <li>Targeted training blocks to address lagging muscle groups</li>
+            <li>Intelligent exercise selection and volume prescription</li>
+            <li>Complements existing training without compromising recovery</li>
+            <li>Improves symmetry, strength, and performance</li>
+            <li>Rotating specialization focuses for continued improvement</li>
           </ul>
           <a href="contact.html" class="btn btn-ghost">Become a Member</a>
         </div>
@@ -252,36 +277,10 @@
           <div class="sub-price">$9.99<small> / mo</small></div>
           <ul class="sub-features">
             <li>Expanding collection of high-protein, performance-focused meals</li>
-            <li>Options for fat loss and muscle-building phases</li>
+            <li>Options designed for both fat loss and muscle-building phases</li>
             <li>Simple, repeatable recipes that fit real-world schedules</li>
             <li>Clear portion guidance for consistency and control</li>
-            <li>Removes guesswork around nutrition</li>
-          </ul>
-          <a href="contact.html" class="btn btn-ghost">Become a Member</a>
-        </div>
-        <div class="sub-card reveal" data-delay="0">
-          <div class="sub-tag">Monthly Subscription</div>
-          <h3>MNM Nutrition / Habit / Mindset Membership</h3>
-          <div class="sub-price">$9.99<small> / mo</small></div>
-          <ul class="sub-features">
-            <li>Structured guidance covering nutrition, habits, and mindset development</li>
-            <li>Monthly focus areas to reinforce discipline and consistency</li>
-            <li>Clear systems and principles rather than temporary motivation</li>
-            <li>Action-based frameworks that translate directly into daily execution</li>
-            <li>Designed to support long-term lifestyle and identity change</li>
-          </ul>
-          <a href="contact.html" class="btn btn-ghost">Become a Member</a>
-        </div>
-        <div class="sub-card reveal" data-delay="120">
-          <div class="sub-tag">Monthly Subscription</div>
-          <h3>MNM Weak Point Specialization</h3>
-          <div class="sub-price">$11.99<small> / mo</small></div>
-          <ul class="sub-features">
-            <li>Targeted training blocks to address lagging muscle groups</li>
-            <li>Intelligent exercise selection and volume prescription</li>
-            <li>Complements existing training without compromising recovery</li>
-            <li>Improves symmetry, strength, and performance</li>
-            <li>Rotating specialization focuses for continued improvement</li>
+            <li>Removes guesswork and decision fatigue around nutrition</li>
           </ul>
           <a href="contact.html" class="btn btn-ghost">Become a Member</a>
         </div>
@@ -351,6 +350,22 @@
   <script>
     const sections = document.querySelectorAll('#coaching, #subscriptions, #otp');
     const tabs = document.querySelectorAll('.page-tab');
+
+    // Smooth scroll with correct offset on tab click
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 110;
+        const tabBarH = document.querySelector('.page-tabs').offsetHeight;
+        const offset = navH + tabBarH;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    // Update active tab on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -358,7 +373,7 @@
           document.querySelector(`.page-tab[href="#${entry.target.id}"]`)?.classList.add('active');
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.15, rootMargin: '-110px 0px 0px 0px' });
     sections.forEach(s => observer.observe(s));
   </script>
 </body>
